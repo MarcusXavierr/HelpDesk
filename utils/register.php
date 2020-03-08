@@ -1,17 +1,17 @@
 <?php
 
-    //Database informations
-    $dsn = 'mysql:host=localhost;dbname=help_desk';
-    $db_username = 'root';
-    $db_password = '';
+    require_once "db_connection.php";
 
+    if( $_POST['name'] = '' || $_POST['email'] == '' || $_POST['password'] == ''){
+        header('Location:../create_account.php?register=error');
+        exit;
+    }
+    
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     try{
-
-        $connection = new PDO($dsn,$db_username,$db_password);
         //Firts, verify if the user 
         $verify = "select email from users";
         $stmt = $connection->query($verify);
@@ -19,7 +19,7 @@
         
         if($stmt->rowCount()>0){
             foreach ($email_list as $test) {
-                if ($email==$test->email || $test->email != null){
+                if ($email==$test->email){
                     header('Location:../create_account.php?user-exists');
                 }
                 else {

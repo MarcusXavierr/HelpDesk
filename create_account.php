@@ -21,6 +21,7 @@
         <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
       </a>
+      <a class="navbar-brand" href="index.php">Log in</a>
     </nav>
 
     <div class="container">    
@@ -47,11 +48,8 @@
               </form>
               <div class="error-message">
                 <?php
-                  if(isset($_GET['login']) && $_GET['login'] == 'error'){
-                    echo "Incorrect username or password";
-                  }
-                  if(isset($_GET['access']) && $_GET['access'] == 'denied'){
-                    echo "You must been logged to access restricted pages";
+                  if(isset($_GET['user-exists'])){
+                    echo "This email is already in use";
                   }
                 ?>
               </div>

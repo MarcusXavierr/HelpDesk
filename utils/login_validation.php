@@ -4,14 +4,11 @@ session_start();
 
 
 
-$dsn = 'mysql:host=localhost;dbname=help_desk';
-$db_username = 'root';
-$db_password = '';
+require_once "db_connection.php";
 $autentication = false;
 $_SESSION['access'] = 'denied';
 
 try{
-    $connection = new PDO($dsn,$db_username,$db_password);
 
     $query = "Select * from users";
     $stmt = $connection->query($query);

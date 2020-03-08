@@ -42,7 +42,7 @@
                   <form action="utils/create_call.php" method="post">
                     <div class="form-group">
                       <label>Title</label>
-                      <input name="title" type="text" class="form-control" placeholder="Título">
+                      <input name="title" type="text" class="form-control" placeholder="">
                     </div>
                     
                     <div class="form-group">
