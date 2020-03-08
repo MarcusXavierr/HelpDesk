@@ -21,6 +21,7 @@
         <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
       </a>
+      <a class="navbar-brand" href="create_account.php">Create Account</a>
     </nav>
 
     <div class="container">    
@@ -48,6 +49,9 @@
                   }
                   if(isset($_GET['access']) && $_GET['access'] == 'denied'){
                     echo "You must been logged to access restricted pages";
+                  }
+                  if(isset($_GET['created'])){
+                    echo "Account created!";
                   }
                 ?>
               </div>
