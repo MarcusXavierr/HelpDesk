@@ -1,0 +1,15 @@
+
+/* index */
+.error-message{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+
+/* home */
+.call-created-message{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+}
