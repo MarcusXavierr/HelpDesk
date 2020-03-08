@@ -2,39 +2,48 @@
 
 session_start();
 
-/*
-To make the application more practical, 
-I will use an array with the information of the registered users 
-instead of taking it from a database
-*/
 
-$userbase = [
-    ['email' => 'marcusxavierr123@gmail.com', 'password' => '123456', 'id' => '1', 'user_credentials' => '1'],
-    ['email' => 'adm@gmail.com', 'password' => 'abcd', 'id' => '2', 'user_credentials' => '1'],
-    ['email' => 'test@gmail.com', 'password' => '147258369', 'id' => '3', 'user_credentials' => '2'],
-    ['email' => 'random@gmail.com', 'password' => '654321', 'id' => '4', 'user_credentials' => '2']
-];
-//user_credentials 1 = Admin
-//user_credential 2 = simple user
+
+$dsn = 'mysql:host=localhost;dbname=help_desk';
+$db_username = 'root';
+$db_password = '';
 $autentication = false;
 $_SESSION['access'] = 'denied';
 
-foreach ($userbase as $user){
-    if($_POST['email'] == $user['email'] && $_POST['password'] == $user['password']){
-        $user_id = $user['id'];
-        $user_perfil_id = $user['user_credentials']; //defines whether the user is an administrator or a simple user
-        $autentication = true;
-    } 
+try{
+    $connection = new PDO($dsn,$db_username,$db_password);
+
+    $query = "Select * from users";
+    $stmt = $connection->query($query);
+    $users_list = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    foreach ($users_list as $user){
+        if($_POST['email'] == $user->email && $_POST['password'] == $user->password){
+            $user_id = $user->id;
+            $user_credentials = $user->admin;
+            $autentication = true;
+        }
+
+        if($autentication){
+            $_SESSION['access'] = 'accepted';
+            $_SESSION['id'] = $user_id;
+            $_SESSION['credentials'] = $user_perfil_id;
+            header('Location:../home.php');
+        
+        } else{
+            header('Location:../index.php?login=error');
+        }
+    }
+
+}catch(PDOException $e){
+    echo "Error: {$e->getCode()}; Message: {$e->getMessage()}";
+
 }
 
-if($autentication){
-    $_SESSION['access'] = 'accepted';
-    $_SESSION['id'] = $user_id;
-    $_SESSION['credentials'] = $user_perfil_id;
-    header('Location:../home.php');
 
-} else{
-    header('Location:index.php?login=error');
-}
+
+
+
+
 
 ?>
