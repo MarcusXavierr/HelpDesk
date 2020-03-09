@@ -27,7 +27,9 @@
 
        header('Location:../home.php?call=created');
     }catch(PDOException $e){
-
+        echo "<pre>";
+        print_r($e);
+        echo "</pre>";
     }
 
     $connection = null;

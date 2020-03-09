@@ -52,8 +52,5 @@
     }catch(PDOException $e){
         print_r($e);
     }
-
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    
 ?>

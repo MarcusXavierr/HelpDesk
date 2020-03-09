@@ -1,12 +1,13 @@
 <?php 
   require_once "utils/session_validator.php";
-$archive = fopen('calls/calls.txt', 'r');
-
-while(!feof($archive)){
-  $register[] = fgets($archive);
-}
-
-fclose($archive);
+  require_once "utils/db_connection.php";
+  try{
+    $query = "Select calls.*, users.name from calls join users on calls.user_id = users.id";
+    $stmt = $connection->query($query);
+    $call_list = $stmt->fetchAll(PDO::FETCH_OBJ);
+  }catch(PDOException $e){
+    
+  }
 
   
 ?>
@@ -46,22 +47,18 @@ fclose($archive);
             </div>
             
             <div class="card-body">
-            <? foreach($register as $call){?>
-            <?php $call_data = explode('#',$call);
-            if($_SESSION['credentials'] != 1){
-              if ($_SESSION['id'] != $call_data[0]){
+            <? foreach($call_list as $call){
+              if($_SESSION['id'] != $call->user_id && $_SESSION['credentials'] != 1){
                 continue;
               }
-          }
-            if(count($call_data)<4){
-              continue;
-              }
             ?>
+            
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><?=$call_data[1]?></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><?=$call_data[2]?></h6>
-                  <p class="card-text"><?=$call_data[3]?></p>
+                  <h5 class="card-title"><?=$call->title?></h5>
+                  <p class="card-text">Call by: <?=$call->name?></p>
+                  <h6 class="card-subtitle mb-2 text-muted">Category: <?=$call->category?></h6>
+                  <p class="card-text"><?=$call->description?></p>
 
                 </div>
               </div>
