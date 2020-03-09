@@ -61,6 +61,8 @@
                       <textarea name="description" class="form-control" rows="3"></textarea>
                     </div>
 
+                    <input type="hidden" name="id" value="<?echo $_SESSION['id']?>">
+
                     <div class="row mt-5">
                       <div class="col-6">
                         <a class="btn btn-lg btn-warning btn-block" href="home.php">Back</a>

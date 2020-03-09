@@ -1,20 +1,36 @@
 <?php
     session_start();
     require_once "db_connection.php";
-    $title = $_POST['title'];
-    $category = $_POST['category'];
-    $description = $_POST['description'];
 
-    print_r($connection)
+    $title = str_replace("'", "''", $_POST['title']);
+    $category = str_replace("'", "''",$_POST['category']);
+    $description = str_replace("'", "''", $_POST['description']);
+    $id = $_POST['id'];
 
-    // $title = str_replace('#','-',$_POST['title']);
-    // $category = str_replace('#','-',$_POST['category']);
-    // $description = str_replace('#','-',$_POST['description']);
 
-    // $text =  $_SESSION['id'] ."#$title#$category#$description" . PHP_EOL; 
-    // $call = fopen('../calls/calls.txt', 'a');
-    // fwrite($call, $text);
-    // fclose($call);
+    if($title == '' || $category == ''  || $description == '' ||$id == ''){
+        header('Location:../open_call.php?error');
+        exit;
+    }
+    try{
+        $sql = "
+        insert into calls (title,category,description,user_id) 
+        values ('$title','$category','$description','$id')
+         ";
+        
+         echo "
+        insert into calls (title,category,description,user_id) 
+        values ('$title','$category','$description','$id')
+         ";
+       $connection->exec($sql);
+    
 
-   // header('Location:../home.php?call=created');
+       header('Location:../home.php?call=created');
+    }catch(PDOException $e){
+
+    }
+
+    $connection = null;
+    
+
 ?>
