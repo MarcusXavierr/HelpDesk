@@ -6,6 +6,16 @@
 
     require '../vendor/autoload.php';
     require_once 'code_email_verification.php';
+    require_once 'db_connection.php';
+
+    $id = $_GET['id'];
+
+    $sql = "
+        insert into codes (code,user_id)
+        values ('$code','$id')
+    ";
+
+    $connection->exec($sql);
 
     $mail = new PHPMailer(true);
 
@@ -29,7 +39,7 @@
         // Content
         $mail->isHTML(true);                                  
         $mail->Subject = 'Activating your account';
-        $mail->Body    = "<h2>Hello {$_GET['name']}</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/?code=$code >Verify your account</a>";
+        $mail->Body    = "<h2>Hello {$_GET['name']}</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/utils/code_verification.php?code=$code >Verify your account</a>";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
@@ -39,6 +49,7 @@
     }
 
     print_r($_GET);
+    $connection = null;
     // header('Location:../index.php?created');
 
 ?>

@@ -32,7 +32,7 @@
                         values ('$name','$email','$password')
                         ";
     
-                    //$connection->exec($sql);
+                    $connection->exec($sql);
                     $query = "Select email,id,name from users order by id desc limit 1";
                     $stmt = $connection->query($query);
                     $user_information = $stmt->fetch(PDO::FETCH_OBJ);
@@ -40,9 +40,9 @@
                     $username = $user_information->name;
                     $userid = $user_information->id;
                     $useremail = $user_information->email;
-                    
+                    $connection = null;
                     header("Location:send_verification_mail.php?name=". $username."&email=".$useremail."&id=".$userid);
-                   // $connection = null;
+                    
                    // header('Location:../index.php?created');
                 }
             }
@@ -60,10 +60,10 @@
                     $username = $user_information->name;
                     $userid = $user_information->id;
                     $useremail = $user_information->email;
-                    
+                    $connection = null;
                     header("Location:send_verification_mail.php?name=". $username."&email=".$useremail."&id=".$userid);
 
-                    $connection = null;
+                   
         }
         
         
