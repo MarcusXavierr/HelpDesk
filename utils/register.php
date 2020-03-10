@@ -2,14 +2,18 @@
 
     require_once "db_connection.php";
 
-    if( $_POST['name'] = '' || $_POST['email'] == '' || $_POST['password'] == ''){
+    if( $_POST['name'] == '' || $_POST['email'] == '' || $_POST['password'] == ''){
         header('Location:../create_account.php?register=error');
         exit;
     }
-    
+    if (isset($_POST['name'])){
+        echo "Existe <br>";
+    }
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    echo $name . "<br>";
+    echo $_POST['name'] . "<br>";
 
     try{
         //Firts, verify if the user 
@@ -28,9 +32,18 @@
                         values ('$name','$email','$password')
                         ";
     
-                    $connection->exec($sql);
-                    $connection = null;
-                    header('Location:../index.php?created');
+                    //$connection->exec($sql);
+                    $query = "Select email,id,name from users order by id desc limit 1";
+                    $stmt = $connection->query($query);
+                    $user_information = $stmt->fetch(PDO::FETCH_OBJ);
+                    print_r($user_information);
+                    $username = $user_information->name;
+                    $userid = $user_information->id;
+                    $useremail = $user_information->email;
+                    
+                    header("Location:send_verification_mail.php?name=". $username."&email=".$useremail."&id=".$userid);
+                   // $connection = null;
+                   // header('Location:../index.php?created');
                 }
             }
         } else{
@@ -39,9 +52,18 @@
                         values ('$name','$email','$password')
                         ";
     
-                    $connection->exec($sql);
+                    //$connection->exec($sql);
+                    $query = "Select email,id,name from users order by id desc limit 1";
+                    $stmt = $connection->query($query);
+                    $user_information = $stmt->fetch(PDO::FETCH_OBJ);
+                    print_r($user_information);
+                    $username = $user_information->name;
+                    $userid = $user_information->id;
+                    $useremail = $user_information->email;
+                    
+                    header("Location:send_verification_mail.php?name=". $username."&email=".$useremail."&id=".$userid);
+
                     $connection = null;
-                    header('Location:../index.php?created');
         }
         
         

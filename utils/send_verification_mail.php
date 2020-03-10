@@ -22,14 +22,14 @@
 
         //Recipients
         $mail->setFrom('emailphpsender@gmail.com', 'Help Desk');
-        $mail->addAddress('marcusxavierr123@gmail.com');    
+        $mail->addAddress($_GET['email']);    
 
  
 
         // Content
         $mail->isHTML(true);                                  
         $mail->Subject = 'Activating your account';
-        $mail->Body    = "<h2>Hello Marcus</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/ >Verify your account</a>";
+        $mail->Body    = "<h2>Hello {$_GET['name']}</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/?code=$code >Verify your account</a>";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
@@ -37,5 +37,8 @@
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+
+    print_r($_GET);
+    // header('Location:../index.php?created');
 
 ?>
