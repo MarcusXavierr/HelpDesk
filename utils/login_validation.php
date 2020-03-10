@@ -24,7 +24,7 @@ try{
         if($autentication){
             $_SESSION['access'] = 'accepted';
             $_SESSION['id'] = $user_id;
-            $_SESSION['credentials'] = $user_perfil_id;
+            $_SESSION['credentials'] = $user_credentials;
             header('Location:../home.php');
         
         } else{
