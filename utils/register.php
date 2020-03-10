@@ -52,5 +52,4 @@
     }catch(PDOException $e){
         print_r($e);
     }
-    
 ?>
