@@ -1,6 +1,7 @@
 <?php 
   require_once "utils/session_validator.php";
   require_once "utils/db_connection.php";
+  require_once "utils/code_email_verification.php";
   try{
     $query = "Select calls.*, users.name from calls join users on calls.user_id = users.id";
     $stmt = $connection->query($query);
