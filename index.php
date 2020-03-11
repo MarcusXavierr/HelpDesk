@@ -53,6 +53,9 @@
                   if(isset($_GET['user'])&& $_GET['user'] == 'unverified'){
                     echo "Please verify your email and activate your account";
                   }
+                  if(isset($_GET['user']) && $_GET['user'] == 'verified'){
+                    echo "Your account has been authenticated!";
+                  }
                   if(isset($_GET['created'])){
                     echo "Account created!";
                   }
@@ -62,5 +65,8 @@
           </div>
         </div>
     </div>
+    <footer class="page-footer font-small blue pt-4">
+        <div class="footer-copyright text-center py-3 font-weight-bold"> Created By Marcus Xavier</div>
+    </footer>
   </body>
 </html>

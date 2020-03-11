@@ -57,5 +57,8 @@
           </div>
         </div>
     </div>
+    <footer class="page-footer font-small blue pt-4">
+        <div class="footer-copyright text-center py-3 font-weight-bold"> Created By Marcus Xavier</div>
+    </footer>
   </body>
 </html>
