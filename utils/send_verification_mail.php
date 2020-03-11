@@ -15,6 +15,8 @@
         values ('$code','$id')
     ";
 
+    $user_email = $_GET['email'];
+
     $connection->exec($sql);
 
     $mail = new PHPMailer(true);
@@ -32,21 +34,21 @@
 
         //Recipients
         $mail->setFrom('emailphpsender@gmail.com', 'Help Desk');
-        $mail->addAddress($_GET['email']);    
+        $mail->addAddress($user_email);    
 
  
 
         // Content
         $mail->isHTML(true);                                  
         $mail->Subject = 'Activating your account';
-        $mail->Body    = "<h2>Hello {$_GET['name']}</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/utils/code_verification.php?code=$code >Verify your account</a>";
+        $mail->Body    = "<h2>Hello {$_GET['name']}</h2><h3>Click the link below to verify your account</h3><br><a href= http://localhost/help_desk/utils/code_verification.php?code=$code&email=$user_email >Verify your account</a>";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
-        $connection = null;
-        header('Location:../index.php?created');
+        exit(header("Location: ../index.php?created"));
+         
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+       echo $e;
     }  
     
 
