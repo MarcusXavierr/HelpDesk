@@ -50,6 +50,9 @@
                   if(isset($_GET['access']) && $_GET['access'] == 'denied'){
                     echo "You must been logged to access restricted pages";
                   }
+                  if(isset($_GET['user'])&& $_GET['user'] == 'unverified'){
+                    echo "Please verify your email and activate your account";
+                  }
                   if(isset($_GET['created'])){
                     echo "Account created!";
                   }
