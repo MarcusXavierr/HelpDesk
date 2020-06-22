@@ -1,7 +1,18 @@
-Description in English
+# Help Desk
 
-This is a help desk program where you can make calls and view those calls. There are two types of users, the ordinary user who can send calls and see only their calls and the administrator who can see all calls
+Esse é um programa help desk onde é possivel fazer chamados e visualizar esses chamados. Existem dois tipos de usuários, o usuário comum que pode enviar chamados e ver apenas seus chamados e o administrador que pode ver todos os chamados.
 
-Description in Portuguese
+### Para usar ele é bem simples, basta criar uma conta
+![alt text](images/github/register.png)
 
-Esse é um programa help desk onde é possivel fazer chamados e visualizar esses chamados. Existem dois tipos de usuários, o usuário comum que pode enviar chamados e ver apenas seus chamados e o administrador que pode ver todos os chamados
+### Depois fazer o login
+![alt text](images/github/login.png)
+
+### Você irá direto para o menu, no primeiro item você entra na página para criar chamados e no segundo você vê os seus chamados
+![alt text](images/github/menu.png)
+
+### criar um chamado
+![alt text](images/github/create_call.png)
+
+### E esperar um administrador visualiza-la e resolver o problema
+![alt text](images/github/consult_call.png)
